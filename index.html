@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Kỹ Thuật Số - Nguyễn Huy Hoàng</title>
+    <!-- Tailwind CSS & FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkMain: '#0f1715',
+                        darkCard: '#1a2421',
+                        accent: '#10b981',
+                        accentHover: '#059669',
+                        textMuted: '#94a3b8',
+                        /* Biến màu cho khu vực Dashboard bài tập */
+                        dashBg: '#0d1511',
+                        dashSidebar: '#0a110d',
+                        dashCard: '#14221b',
+                        dashTab: '#182a21',
+                        dashBorder: '#243c30'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Tùy chỉnh thanh cuộn */
+        body { background-color: #0f1715; color: #e2e8f0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f1715; }
+        ::-webkit-scrollbar-thumb { background: #2d4a3e; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+        
+        .nav-link { position: relative; color: #e2e8f0; font-weight: 500; transition: color 0.3s; }
+        .nav-link:hover { color: #10b981; }
+
+        /* === CSS RIÊNG CHO KHU VỰC DASHBOARD BÀI TẬP === */
+        .dash-menu-item {
+            padding: 14px 20px;
+            cursor: pointer;
+            font-size: 15px;
+            color: #e2e8f0;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        .dash-menu-item:hover { background-color: #14221b; color: #10b981; }
+        .dash-menu-item.active {
+            background-color: #14221b;
+            color: #10b981;
+            border-left-color: #10b981;
+            font-weight: 600;
+        }
+
+        .dash-tab-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .dash-tab-btn:hover { color: #fff; }
+        .dash-tab-btn.active {
+            color: #10b981;
+            border-bottom: 2px solid #10b981;
+        }
+
+        .dash-content { display: none; animation: fadeIn 0.3s; }
+        .dash-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .dash-img-container { margin: 20px 0; text-align: center; }
+        .dash-img-container img { max-width: 100%; border: 1px solid #243c30; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .dash-img-caption { font-size: 13px; color: #94a3b8; margin-top: 10px; font-style: italic; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+        th, td { border: 1px solid #243c30; padding: 12px; text-align: left; }
+        th { background-color: #182a21; color: #10b981; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- === 1. NAVBAR === -->
+    <nav class="fixed top-0 w-full bg-darkMain/90 backdrop-blur-md border-b border-gray-800 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="avatar.png" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-accent">
+                <span class="font-bold text-white text-lg">Nguyễn Huy Hoàng
+                
+                </span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm">
+                <a href="#home" class="nav-link">Trang chủ</a>
+                <a href="#gioithieu" class="nav-link">Giới thiệu</a>
+                <a href="#kynang" class="nav-link">Kỹ năng</a>
+                <a href="#baitap" class="nav-link">Bài tập</a>
+                <a href="#tongket" class="nav-link">Tổng kết</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- === 2. HERO SECTION === -->
+    <section id="home" class="pt-32 pb-20 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="inline-block px-4 py-1.5 bg-accent/20 text-accent rounded-full text-xs font-bold mb-6 tracking-wide uppercase">Nhập môn Công nghệ số & AI</span>
+            <h1 class="text-5xl font-extrabold text-white mb-4 leading-tight">Portfolio <br><span class="text-accent">Kỹ Thuật Số</span></h1>
+            <p class="text-xl text-gray-300 font-semibold mb-6">Nguyễn Huy Hoàng • Ngành Kỹ thuật Máy tính</p>
+            <p class="text-textMuted mb-8 leading-relaxed">Nơi lưu trữ, hệ thống hóa và trưng bày các sản phẩm học tập cá nhân, thể hiện quá trình rèn luyện kỹ năng số và năng lực ứng dụng Trí tuệ Nhân tạo trong học thuật chuyên ngành.</p>
+            <div class="flex gap-4">
+                <a href="#chitiets" class="bg-accent hover:bg-accentHover text-white px-6 py-3 rounded-lg font-semibold transition-all">Khám phá Bài Tập</a>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <div class="w-80 h-auto bg-darkCard border-4 border-gray-800 rounded-2xl shadow-2xl flex flex-col items-center p-6 space-y-4">
+                <img src="avatar.png" alt="Nguyễn Huy Hoàng" class="w-64 h-64 rounded-xl object-cover border border-[#243c30] shadow-md">
+                <h3 class="text-2xl font-bold text-white text-center">Nguyễn Huy Hoàng</h3>
+                <p class="text-accent font-mono">MSV: 25020592</p>
+                <p class="text-sm text-gray-400 text-center">Ngành: Kỹ thuật Máy tính<br>Lớp: E-CE1 | ĐH Công Nghệ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- === 3. GIỚI THIỆU === -->
+    <section id="gioithieu" class="py-20 bg-darkCard/30 border-t border-gray-800 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-xs text-accent uppercase tracking-widest font-bold mb-2">Trang giới thiệu</h2>
+            <h3 class="text-3xl font-bold text-white mb-12">Về bản thân mình</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="md:col-span-2 space-y-8 text-textMuted leading-relaxed">
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-3 text-accent">1. Giới thiệu bản thân & Định hướng</h4>
+                        <p>Xin chào, tôi là <strong>Nguyễn Huy Hoàng</strong>, sinh viên ngành <strong>Kỹ thuật Máy tính</strong> tại Đại học Công nghệ. Niềm đam mê lớn nhất của tôi nằm ở sự giao thoa giữa thiết kế phần cứng, hệ thống vi mạch và sức mạnh đột phá của Trí tuệ Nhân tạo (AI). Tôi tin rằng trong kỷ nguyên vạn vật kết nối (IoT) hiện nay, một kỹ sư không chỉ cần am hiểu mạch điện hay ngôn ngữ lập trình bậc thấp, mà còn phải biết tận dụng AI để tối ưu hóa quy trình thiết kế, mô phỏng và vận hành hệ thống.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-3 text-accent">2. Mục tiêu học tập và phát triển</h4>
+                        <p>Tại giảng đường đại học, tôi đặt mục tiêu xây dựng một nền tảng kỹ thuật vững chắc từ vi xử lý đến hệ thống nhúng. Song song đó, tôi chủ động làm chủ các công cụ AI tạo sinh (Generative AI). Mục đích của tôi không phải để AI làm thay việc của mình, mà là biến AI thành một "người cộng sự đắc lực", giúp tăng tốc độ tra cứu tài liệu học thuật chuyên sâu, gợi ý giải pháp debug mã nguồn, phân tích dữ liệu phần cứng và nâng cao hiệu suất làm việc nhóm.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-3 text-accent">3. Mục tiêu của Portfolio này</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Lưu trữ có hệ thống:</strong> Xây dựng cơ sở dữ liệu cá nhân khoa học về các dự án môn học và nghiên cứu kỹ thuật.</li>
+                            <li><strong>Minh chứng năng lực:</strong> Trưng bày các sản phẩm thực tế kết hợp giữa tư duy logic của sinh viên kỹ thuật và sự tối ưu hóa từ công cụ số.</li>
+                            <li><strong>Định hình thương hiệu:</strong> Chuẩn bị hành trang số phục vụ cho hành trình trở thành một Kỹ sư Kỹ thuật Máy tính chuyên nghiệp trong tương lai.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-darkMain border border-gray-800 rounded-xl p-8">
+                    <h4 class="text-lg font-bold text-white mb-6">Các Kỹ năng Số Trọng tâm</h4>
+                    <ul class="space-y-4 text-sm text-gray-300">
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Quản lý tệp tin và thiết lập hệ thống lưu trữ khoa học.</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Tra cứu, đánh giá độ tin cậy thông tin học thuật.</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Kỹ thuật viết câu lệnh (Prompt Engineering).</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Giao tiếp, quản lý tiến độ và hợp tác trực tuyến.</li>
+                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent mt-1"></i> Áp dụng AI có trách nhiệm, liêm chính học thuật.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === 4. HỆ THỐNG KỸ NĂNG === -->
+    <section id="kynang" class="py-20 px-6 max-w-7xl mx-auto">
+        <h2 class="text-xs text-accent uppercase tracking-widest font-bold mb-2">Kỹ năng đang hoàn thiện</h2>
+        <h3 class="text-3xl font-bold text-white mb-10">Hệ thống kỹ năng số</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div class="bg-darkCard p-6 rounded-xl border border-gray-800 hover:border-accent transition-all">
+                <i class="fas fa-folder-tree text-3xl text-accent mb-4"></i>
+                <h4 class="text-lg font-bold text-white mb-2">Quản lý hệ thống dữ liệu</h4>
+                <p class="text-sm text-textMuted">Thành thạo việc tổ chức cấu trúc phân cấp cây thư mục, áp dụng quy chuẩn đặt tên đồng bộ.</p>
+            </div>
+            <div class="bg-darkCard p-6 rounded-xl border border-gray-800 hover:border-accent transition-all">
+                <i class="fas fa-search text-3xl text-accent mb-4"></i>
+                <h4 class="text-lg font-bold text-white mb-2">Khai thác thông tin</h4>
+                <p class="text-sm text-textMuted">Ứng dụng công cụ tìm kiếm để tra cứu, chọn lọc, thẩm định các nguồn tài liệu uy tín.</p>
+            </div>
+            <div class="bg-darkCard p-6 rounded-xl border border-gray-800 hover:border-accent transition-all">
+                <i class="fas fa-terminal text-3xl text-accent mb-4"></i>
+                <h4 class="text-lg font-bold text-white mb-2">Kỹ nghệ câu lệnh</h4>
+                <p class="text-sm text-textMuted">Làm chủ kỹ thuật viết Prompt để tối ưu hóa kết quả phản hồi từ các mô hình AI.</p>
+            </div>
+            <div class="bg-darkCard p-6 rounded-xl border border-gray-800 hover:border-accent transition-all">
+                <i class="fas fa-users text-3xl text-accent mb-4"></i>
+                <h4 class="text-lg font-bold text-white mb-2">Hợp tác số</h4>
+                <p class="text-sm text-textMuted">Quản trị dự án nhóm hiệu quả qua Trello, thảo luận bằng Discord, Google Docs.</p>
+            </div>
+            <div class="bg-darkCard p-6 rounded-xl border border-gray-800 hover:border-accent transition-all">
+                <i class="fas fa-magic text-3xl text-accent mb-4"></i>
+                <h4 class="text-lg font-bold text-white mb-2">Sáng tạo nội dung</h4>
+                <p class="text-sm text-textMuted">Phối hợp linh hoạt các nền tảng Generative AI để lên kịch bản và thiết kế sản phẩm.</p>
+            </div>
+            <div class="bg-darkCard p-6 rounded-xl border border-gray-800 hover:border-accent transition-all">
+                <i class="fas fa-balance-scale text-3xl text-accent mb-4"></i>
+                <h4 class="text-lg font-bold text-white mb-2">Liêm chính học thuật</h4>
+                <p class="text-sm text-textMuted">Hiểu ranh giới, đạo đức, xây dựng nguyên tắc cá nhân khi sử dụng AI không lệ thuộc.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- === 5. TẬP HỢP BÀI TẬP (GRID) === -->
+    <section id="baitap" class="py-20 bg-darkCard/30 border-t border-gray-800 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-xs text-accent uppercase tracking-widest font-bold mb-2">Trang Dự Án</h2>
+            <h3 class="text-3xl font-bold text-white mb-8">Tập hợp Bài tập đã hoàn thành</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-darkMain border border-gray-800 p-6 rounded-xl relative group">
+                    <div class="text-xs text-accent font-bold mb-2">BÀI TẬP 1 </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Quản trị Tệp tin & Thư mục</h4>
+                    <p class="text-sm text-textMuted mb-6">Thao tác cơ bản trên HĐH. Thiết lập cấu trúc thư mục phân cấp tối ưu và áp dụng quy tắc đặt tên.</p>
+                    <button onclick="openDetail('bt1')" class="text-accent font-semibold text-sm hover:underline">Xem chi tiết báo cáo <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+                <div class="bg-darkMain border border-gray-800 p-6 rounded-xl relative group">
+                    <div class="text-xs text-accent font-bold mb-2">BÀI TẬP 2 </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Tra cứu & Đánh giá Học thuật</h4>
+                    <p class="text-sm text-textMuted mb-6">Tìm kiếm và đánh giá bài báo khoa học về TinyML trên thiết bị IoT. Thẩm định nguồn uy tín.</p>
+                    <button onclick="openDetail('bt2')" class="text-accent font-semibold text-sm hover:underline">Xem chi tiết báo cáo <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+                <div class="bg-darkMain border border-gray-800 p-6 rounded-xl relative group">
+                    <div class="text-xs text-accent font-bold mb-2">BÀI TẬP 3 </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Kỹ nghệ Prompt Kỹ thuật</h4>
+                    <p class="text-sm text-textMuted mb-6">Viết Prompt hiệu quả cho các tác vụ học tập theo công thức C-L-E-A-R.</p>
+                    <button onclick="openDetail('bt3')" class="text-accent font-semibold text-sm hover:underline">Xem chi tiết báo cáo <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+                <div class="bg-darkMain border border-gray-800 p-6 rounded-xl relative group">
+                    <div class="text-xs text-accent font-bold mb-2">BÀI TẬP 4 </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Hợp tác & Quản trị trực tuyến</h4>
+                    <p class="text-sm text-textMuted mb-6">Quản lý dự án nhóm qua Trello, Google Docs, Discord với vai trò Lập trình viên.</p>
+                    <button onclick="openDetail('bt4')" class="text-accent font-semibold text-sm hover:underline">Xem chi tiết báo cáo <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+                <div class="bg-darkMain border border-gray-800 p-6 rounded-xl relative group">
+                    <div class="text-xs text-accent font-bold mb-2">BÀI TẬP 5 </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Ứng dụng Gen AI Sáng tạo Nội dung</h4>
+                    <p class="text-sm text-textMuted mb-6">Sử dụng đa nền tảng Generative AI để thiết kế Infographic Kiến trúc Vi xử lý.</p>
+                    <button onclick="openDetail('bt5')" class="text-accent font-semibold text-sm hover:underline">Xem chi tiết báo cáo <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+                <div class="bg-darkMain border border-gray-800 p-6 rounded-xl relative group">
+                    <div class="text-xs text-accent font-bold mb-2">BÀI TẬP 6 </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Tư duy Độc lập & Liêm chính</h4>
+                    <p class="text-sm text-textMuted mb-6">Hệ thống hóa nguyên tắc cá nhân về sử dụng AI có trách nhiệm, phòng ngừa sai lệch.</p>
+                    <button onclick="openDetail('bt6')" class="text-accent font-semibold text-sm hover:underline">Xem chi tiết báo cáo <i class="fas fa-arrow-right ml-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- === 6. CHI TIẾT 6 BÀI TẬP (DASHBOARD TÍCH HỢP) === -->
+    <section id="chitiets" class="py-12 px-6 max-w-7xl mx-auto">
+        <h3 class="text-3xl font-bold text-white mb-8"><i class="fas fa-layer-group text-accent mr-3"></i>Không gian Chi tiết Bài tập</h3>
+        
+        <div class="border border-[#243c30] rounded-xl flex flex-col md:flex-row bg-[#0d1511] overflow-hidden shadow-2xl h-[800px]">
+            
+            <!-- SIDEBAR CHỌN BÀI TẬP -->
+            <div class="w-full md:w-80 bg-[#0a110d] border-r border-[#243c30] overflow-y-auto shrink-0 flex flex-col">
+                <div class="p-5 border-b border-[#243c30] bg-[#14221b]/50">
+                    <h3 class="font-bold text-white tracking-wider">DANH MỤC BÀI TẬP</h3>
+                </div>
+                <ul class="flex-1">
+                    <li class="dash-menu-item active flex items-center gap-3" onclick="switchAssignment('bt1', this)">
+                        <i class="fas fa-folder"></i> Bài tập 1: Quản trị Tệp tin
+                    </li>
+                    <li class="dash-menu-item flex items-center gap-3" onclick="switchAssignment('bt2', this)">
+                        <i class="fas fa-search"></i> Bài tập 2: Tra cứu Học thuật
+                    </li>
+                    <li class="dash-menu-item flex items-center gap-3" onclick="switchAssignment('bt3', this)">
+                        <i class="fas fa-terminal"></i> Bài tập 3: Kỹ nghệ Prompt
+                    </li>
+                    <li class="dash-menu-item flex items-center gap-3" onclick="switchAssignment('bt4', this)">
+                        <i class="fas fa-users"></i> Bài tập 4: Hợp tác Trực tuyến
+                    </li>
+                    <li class="dash-menu-item flex items-center gap-3" onclick="switchAssignment('bt5', this)">
+                        <i class="fas fa-magic"></i> Bài tập 5: Ứng dụng Gen AI
+                    </li>
+                    <li class="dash-menu-item flex items-center gap-3" onclick="switchAssignment('bt6', this)">
+                        <i class="fas fa-scale-balanced"></i> Bài tập 6: Liêm chính Học thuật
+                    </li>
+                </ul>
+            </div>
+
+            <!-- NỘI DUNG CHI TIẾT BÊN PHẢI -->
+            <div class="flex-1 p-8 overflow-y-auto relative">
+                
+                <!-- === BÀI 1 === -->
+                <div id="bt1" class="assignment-container block">
+                    <h2 class="text-3xl font-bold text-white mb-2">Quản trị Hệ thống Tệp tin & Thư mục</h2>
+                    <div class="flex gap-4 border-b border-[#243c30] mb-6 pb-2 mt-6">
+                        <button class="dash-tab-btn active" onclick="switchTab('bt1', 'muctieu', this)"><i class="fas fa-bullseye mr-2"></i>Mục tiêu</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt1', 'quatrinh', this)"><i class="fas fa-cogs mr-2"></i>Quá trình</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt1', 'sanpham', this)"><i class="fas fa-box-open mr-2"></i>Sản phẩm</button>
+                    </div>
+
+                    <div id="bt1-muctieu" class="dash-content active">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Mục tiêu bài tập</h3>
+                            <p>Làm chủ các thao tác quản trị tài nguyên số cốt lõi trên hệ điều hành Windows thông qua File Explorer. Thiết lập được một cấu trúc cây thư mục khoa học, thực thi quy chuẩn đặt tên file đồng bộ, điều hướng dữ liệu an toàn.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="bt1-quatrinh" class="dash-content">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Quá trình thực hiện</h3>
+                            <p><strong>Bước 1:</strong> Sử dụng phím tắt <code>Windows + E</code>, truy cập thư mục an toàn <code>Documents</code> để khởi tạo thư mục gốc: <code>ThucHanh_NguyenHuyHoang</code>.</p>
+                            <p><strong>Bước 2:</strong> Tạo tệp <code>GhiChu.txt</code>, đổi thành <code>GhiChuQuanTrong.txt</code>. Xây dựng thêm thư mục con <code>TaiLieu</code>.</p>
+                            <p><strong>Bước 3:</strong> Điều hướng dữ liệu (Copy/Paste) và thực thi xóa vĩnh viễn tệp nháp ra khỏi ổ cứng bằng <code>Shift + Delete</code>.</p>
+                            
+                            <div class="dash-img-container mt-6">
+                                <img src="ảnh b1.png" alt="Quá trình thực hiện Bài 1">
+                                <p class="dash-img-caption">Hình 1.1: Quá trình phân cấp thư mục và điều hướng file.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="bt1-sanpham" class="dash-content">
+                        <div class="bg-[#182a21] border border-[#243c30] p-6 rounded-lg text-center mb-6">
+                            <p class="text-gray-300 mb-4">Cây thư mục được tổ chức phân cấp rõ ràng trên Windows. Dưới đây là báo cáo PDF đầy đủ.</p>
+                            <a href="BaoCao_ThucHanh_NguyenHuyHoang_CoAnh.pdf" target="_blank" class="bg-accent text-white px-6 py-3 rounded font-bold hover:bg-accentHover transition-colors"><i class="fas fa-file-pdf mr-2"></i>Xem toàn văn báo cáo (PDF)</a>
+                        </div>
+                        <div class="dash-img-container">
+                            <img src="Ảnh màn hình 2026-06-05 lúc 19.46.07.png" alt="Sản phẩm Bài 1">
+                            <p class="dash-img-caption">Hình 1.2: Cây thư mục hoàn chỉnh sau khi thực thi thao tác.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === BÀI 2 === -->
+                <div id="bt2" class="assignment-container hidden">
+                    <h2 class="text-3xl font-bold text-white mb-2">Tìm kiếm & Đánh giá Thông tin Học thuật</h2>
+                    <div class="flex gap-4 border-b border-[#243c30] mb-6 pb-2 mt-6">
+                        <button class="dash-tab-btn active" onclick="switchTab('bt2', 'muctieu', this)"><i class="fas fa-bullseye mr-2"></i>Mục tiêu</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt2', 'quatrinh', this)"><i class="fas fa-cogs mr-2"></i>Quá trình</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt2', 'sanpham', this)"><i class="fas fa-box-open mr-2"></i>Sản phẩm</button>
+                    </div>
+
+                    <div id="bt2-muctieu" class="dash-content active">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Mục tiêu bài tập</h3>
+                            <p>Nâng cao năng lực tra cứu, chọn lọc và đánh giá độ tin cậy của các tài liệu chuyên ngành. Nghiên cứu chủ đề: "Tối ưu hóa mô hình học máy siêu nhỏ (TinyML) trên thiết bị IoT vùng biên".</p>
+                        </div>
+                    </div>
+                    <div id="bt2-quatrinh" class="dash-content">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Quá trình thực hiện</h3>
+                            <p>Xác định từ khóa: TinyML, Edge Computing, Hardware constraints. Truy xuất cơ sở dữ liệu IEEE Xplore, Google Scholar từ năm 2020-2026. Đánh giá tính chuẩn xác của các bài báo Peer-reviewed.</p>
+                            <div class="dash-img-container mt-6">
+                                <img src="Ảnh màn hình 2026-06-05 lúc 19.54.17.png" alt="Tra cứu tài liệu Bài 2">
+                                <p class="dash-img-caption">Hình 2.1: Sử dụng bộ lọc từ khóa trên cơ sở dữ liệu học thuật.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bt2-sanpham" class="dash-content">
+                        <div class="bg-[#182a21] border border-[#243c30] p-6 rounded-lg text-center mb-6">
+                            <p class="text-gray-300 mb-4">Danh mục tài liệu đánh giá chuyên sâu đã được trích xuất hoàn thiện.</p>
+                            <a href="lms2.pdf" target="_blank" class="bg-accent text-white px-6 py-3 rounded font-bold hover:bg-accentHover transition-colors"><i class="fas fa-file-pdf mr-2"></i>Xem toàn văn báo cáo (PDF)</a>
+                        </div>
+                        <table>
+                            <tr>
+                                <th>Nguồn tài liệu</th>
+                                <th>Phân tích & Phương pháp</th>
+                            </tr>
+                            <tr>
+                                <td>A Machine Learning-Oriented Survey (IEEE)</td>
+                                <td>Đánh giá toàn diện thiết kế phần cứng vi mạch và thuật toán tối ưu hóa.</td>
+                            </tr>
+                            <tr>
+                                <td>U-TOE Toolkit (IEEE Xplore)</td>
+                                <td>Cung cấp dữ liệu định lượng đo lường trực tiếp trên board mạch thực tế.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- === BÀI 3 === -->
+                <div id="bt3" class="assignment-container hidden">
+                    <h2 class="text-3xl font-bold text-white mb-2">Kỹ nghệ Câu lệnh (Prompt Engineering)</h2>
+                    <div class="flex gap-4 border-b border-[#243c30] mb-6 pb-2 mt-6">
+                        <button class="dash-tab-btn active" onclick="switchTab('bt3', 'muctieu', this)"><i class="fas fa-bullseye mr-2"></i>Mục tiêu</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt3', 'quatrinh', this)"><i class="fas fa-cogs mr-2"></i>Quá trình</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt3', 'sanpham', this)"><i class="fas fa-box-open mr-2"></i>Sản phẩm</button>
+                    </div>
+
+                    <div id="bt3-muctieu" class="dash-content active">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Mục tiêu bài tập</h3>
+                            <p>Nắm vững phương pháp thiết kế hệ thống giao tiếp với LLMs để tối ưu hóa 3 tác vụ học tập: Tóm tắt văn bản, Giải thích khái niệm và Tạo đề cương ôn tập.</p>
+                        </div>
+                    </div>
+                    <div id="bt3-quatrinh" class="dash-content">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Thực nghiệm công thức C-L-E-A-R</h3>
+                            <p>Cung cấp bối cảnh (Context), ép buộc định dạng (Length), đưa ví dụ mẫu (Examples), phân vai chuyên gia (Actor) và tinh chỉnh liên tục (Refine).</p>
+                            <div class="dash-img-container mt-6">
+                                <img src="Ảnh màn hình 2026-06-05 lúc 20.19.34.png" alt="Prompt Engineering Bài 3">
+                                <p class="dash-img-caption">Hình 3.1: Quá trình thiết lập tham số Prompt chuyên sâu với LLMs.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bt3-sanpham" class="dash-content">
+                        <div class="bg-[#182a21] border border-[#243c30] p-6 rounded-lg text-center mb-6">
+                            <p class="text-gray-300 mb-4">Các đoạn hội thoại đánh giá hiệu năng LLM đã được ghi nhận vào báo cáo.</p>
+                            <a href="lms3.pdf" target="_blank" class="bg-accent text-white px-6 py-3 rounded font-bold hover:bg-accentHover transition-colors"><i class="fas fa-file-pdf mr-2"></i>Xem toàn văn báo cáo (PDF)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === BÀI 4 === -->
+                <div id="bt4" class="assignment-container hidden">
+                    <h2 class="text-3xl font-bold text-white mb-2">Kỹ năng Hợp tác Trực tuyến</h2>
+                    <div class="flex gap-4 border-b border-[#243c30] mb-6 pb-2 mt-6">
+                        <button class="dash-tab-btn active" onclick="switchTab('bt4', 'muctieu', this)"><i class="fas fa-bullseye mr-2"></i>Mục tiêu</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt4', 'quatrinh', this)"><i class="fas fa-cogs mr-2"></i>Quá trình</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt4', 'sanpham', this)"><i class="fas fa-box-open mr-2"></i>Sản phẩm</button>
+                    </div>
+
+                    <div id="bt4-muctieu" class="dash-content active">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Mục tiêu bài tập</h3>
+                            <p>Điều phối hiệu quả các nguồn lực công nghệ để quản trị dự án nhóm "Smart IoT System" mà không gặp độ trễ về mặt không gian và thời gian.</p>
+                        </div>
+                    </div>
+                    <div id="bt4-quatrinh" class="dash-content">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Vận hành quy trình</h3>
+                            <p>Các công cụ được sử dụng cho dự án.</p>
+                            <div class="dash-img-container mt-6">
+                                <img src="Ảnh màn hình 2026-06-05 lúc 20.31.09.png" alt="Trello Kanban Bài 4">
+                                <p class="dash-img-caption">Hình 4.1: Bảng tổng hợp các công cụ được sử dụng.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bt4-sanpham" class="dash-content">
+                        <div class="bg-[#182a21] border border-[#243c30] p-6 rounded-lg text-center mb-6">
+                            <p class="text-gray-300 mb-4">Minh chứng.</p>
+                            <a href="lms4.pdf" target="_blank" class="bg-accent text-white px-6 py-3 rounded font-bold hover:bg-accentHover transition-colors"><i class="fas fa-file-pdf mr-2"></i>Xem toàn văn báo cáo (PDF)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- === BÀI 5 === -->
+                <div id="bt5" class="assignment-container hidden">
+                    <h2 class="text-3xl font-bold text-white mb-2">Ứng dụng Gen AI Sáng tạo Nội dung</h2>
+                    <div class="flex gap-4 border-b border-[#243c30] mb-6 pb-2 mt-6">
+                        <button class="dash-tab-btn active" onclick="switchTab('bt5', 'muctieu', this)"><i class="fas fa-bullseye mr-2"></i>Mục tiêu</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt5', 'quatrinh', this)"><i class="fas fa-cogs mr-2"></i>Quá trình</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt5', 'sanpham', this)"><i class="fas fa-box-open mr-2"></i>Sản phẩm</button>
+                    </div>
+
+                    <div id="bt5-muctieu" class="dash-content active">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Mục tiêu bài tập</h3>
+                            <p>Chứng minh khả năng cộng tác hoàn hảo giữa tư duy Kỹ thuật máy tính và hệ sinh thái Gen AI để thiết kế sản phẩm Infographic: "Sự tiến hóa của Kiến trúc Vi xử lý".</p>
+                        </div>
+                    </div>
+                    <div id="bt5-quatrinh" class="dash-content">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Quy trình</h3>
+                            <p>Sử dụng các công cụ Gen AI để hỗ trợ quá trình thực hiện dự án.</p>
+                            <div class="dash-img-container mt-6">
+                                <img src="Ảnh màn hình 2026-06-05 lúc 20.41.52.png" alt="Thiết kế Bài 5">
+                                <p class="dash-img-caption">Hình 5.1: Quá trình tạo dàn ý.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bt5-sanpham" class="dash-content">
+                        <div class="bg-[#182a21] border border-[#243c30] p-6 rounded-lg text-center mb-6">
+                            <p class="text-gray-300 mb-4">Sản phẩm.</p>
+                            <a href="lms5.pdf" target="_blank" class="bg-accent text-white px-6 py-3 rounded font-bold hover:bg-accentHover transition-colors"><i class="fas fa-file-pdf mr-2"></i>Xem toàn văn báo cáo (PDF)</a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <!-- === BÀI 6 === -->
+                <div id="bt6" class="assignment-container hidden">
+                    <h2 class="text-3xl font-bold text-white mb-2">Tư duy Độc lập & Liêm chính Học thuật</h2>
+                    <div class="flex gap-4 border-b border-[#243c30] mb-6 pb-2 mt-6">
+                        <button class="dash-tab-btn active" onclick="switchTab('bt6', 'muctieu', this)"><i class="fas fa-bullseye mr-2"></i>Mục tiêu</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt6', 'quatrinh', this)"><i class="fas fa-cogs mr-2"></i>Quá trình</button>
+                        <button class="dash-tab-btn" onclick="switchTab('bt6', 'sanpham', this)"><i class="fas fa-box-open mr-2"></i>Sản phẩm</button>
+                    </div>
+
+                    <div id="bt6-muctieu" class="dash-content active">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Mục tiêu bài tập</h3>
+                            <p>Thiết lập ranh giới đạo đức số và định hình bản sắc tư duy cá nhân. Khẳng định AI chỉ là "Cộng sự trí tuệ", còn năng lực cốt lõi xuất phát từ người học.</p>
+                        </div>
+                    </div>
+                    <div id="bt6-quatrinh" class="dash-content">
+                        <div class="bg-[#14221b] border border-[#243c30] p-6 rounded-lg text-gray-300">
+                            <h3 class="text-accent font-bold text-lg mb-3">Xác định rõ nguyên tắc</h3>
+                            
+                            <div class="dash-img-container mt-6">
+                                <img src="Ảnh màn hình 2026-06-05 lúc 20.47.43.png" alt="Đạo văn Bài 6">
+                                <p class="dash-img-caption">Hình 6.1: Nguyên tắc khi sử dụng AI.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bt6-sanpham" class="dash-content">
+                        <div class="bg-[#182a21] border border-[#243c30] p-6 rounded-lg text-center mb-6">
+                            <p class="text-gray-300 mb-4">Cam kết hành động theo 5 trụ cột đạo đức khắt khe trong môi trường đại học.</p>
+                            <a href="lms6.pdf" target="_blank" class="bg-accent text-white px-6 py-3 rounded font-bold hover:bg-accentHover transition-colors"><i class="fas fa-file-pdf mr-2"></i>Xem toàn văn báo cáo (PDF)</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- === 7. TỔNG KẾT === -->
+    <section id="tongket" class="py-20 bg-darkCard/50 border-t border-gray-800 px-6 mt-12">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-xs text-accent uppercase tracking-widest font-bold mb-2">Trang tổng kết</h2>
+            <h3 class="text-3xl font-bold text-white mb-12">Đánh giá bản thân & Trưởng thành</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="md:col-span-2 space-y-8 text-textMuted leading-relaxed">
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-3 text-accent">1. Sự trưởng thành trong tư duy Kỹ thuật</h4>
+                        <p>Trải qua quá trình rèn luyện, tư duy của một sinh viên Kỹ thuật Máy tính trong tôi đã có sự chuyển biến rõ rệt. Thay vì chỉ cắm cúi viết từng dòng code C/C++ hay vẽ mạch một cách thủ công, tôi đã biết cách ứng dụng Trí tuệ Nhân tạo để tự động hóa các tác vụ lặp đi lặp lại, khảo sát các kiến trúc vi xử lý mới và mở rộng góc nhìn tiếp cận vấn đề. Tôi nhận ra AI không đe dọa công việc của kỹ sư phần cứng, mà nó sẽ là công cụ loại bỏ những ai không biết tận dụng sức mạnh của nó.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-3 text-accent">2. Điểm tâm đắc và Bài học từ thách thức</h4>
+                        <p>Điểm tôi tự hào nhất là khả năng sử dụng kỹ nghệ câu lệnh (Prompt Engineering) để bóc tách nhanh các tài liệu chuyên sâu về vi điều khiển trên thư viện IEEE - điều mà trước đây tiêu tốn rất nhiều thời gian. Tuy nhiên, bài học lớn nhất tôi nhận được là <strong>"không bao giờ tin tưởng AI tuyệt đối"</strong>. Các mô hình ngôn ngữ vẫn có thể "ảo giác" khi cung cấp thông số linh kiện, do đó năng lực thẩm định thông tin và nền tảng kiến thức lõi của bản thân mới là bộ lọc quan trọng nhất.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-white mb-3 text-accent">3. Định hướng phát triển chuyên môn trong tương lai</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>Phát triển chuyên môn:</strong> Tiếp tục đào sâu ngành Kỹ thuật Máy tính, đặc biệt là mảng vi mạch và hệ thống nhúng (Embedded Systems).</li>
+                            <li><strong>Ứng dụng AI:</strong> Tích hợp AI vào quy trình R&D để hỗ trợ thiết kế mạch, phân tích dữ liệu cảm biến và tối ưu hóa test case.</li>
+                            <li><strong>Liêm chính số:</strong> Luôn tuân thủ nguyên tắc học thuật, sử dụng công nghệ một cách có trách nhiệm để tạo ra những sản phẩm kỹ thuật thực sự mang lại giá trị.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-darkMain border border-gray-800 rounded-xl p-8 h-fit">
+                    <h4 class="text-lg font-bold text-white mb-6">Hệ thống năng lực số cốt lõi</h4>
+                    <div class="space-y-4 text-sm text-gray-300">
+                        <div><span class="text-accent font-bold"><i class="fas fa-check"></i> Quản trị File:</span> Thiết lập cấu trúc Windows File Explorer đồng nhất.</div>
+                        <div><span class="text-accent font-bold"><i class="fas fa-check"></i> Tra cứu Học thuật:</span> Khai thác IEEE Xplore, trích dẫn chuẩn Harvard/IEEE.</div>
+                        <div><span class="text-accent font-bold"><i class="fas fa-check"></i> Thiết kế Prompt:</span> Áp dụng C-L-E-A-R cho tác vụ tổng hợp kỹ thuật.</div>
+                        <div><span class="text-accent font-bold"><i class="fas fa-check"></i> AI Creating:</span> Dàn trang, sáng tạo hình ảnh kỹ thuật vi mạch (Canva, DALL-E).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-darkMain py-8 text-center text-gray-500 text-sm border-t border-gray-800">
+        <p>© 2026 Portfolio Kỹ Thuật Số • Nhập môn Công nghệ số & AI</p>
+        <p class="mt-2 text-xs">Sinh viên thực hiện: Nguyễn Huy Hoàng - Đại học Công nghệ, ĐHQGHN</p>
+    </footer>
+
+    <!-- JAVASCRIPT ĐIỀU KHIỂN TƯƠNG TÁC XỊN XÒ -->
+    <script>
+        // Mở Dashboard Chi Tiết khi bấm từ Grid Card Trang Chủ
+        function openDetail(btId) {
+            // Hiện section chi tiết và cuộn mượt mà xuống khu vực đó
+            const detailSection = document.getElementById('chitiets');
+            detailSection.classList.remove('hidden');
+            detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Tìm thẻ <li> tương ứng trên sidebar để giả lập thao tác click
+            const sidebarItems = document.querySelectorAll('.dash-menu-item');
+            sidebarItems.forEach(el => {
+                if (el.getAttribute('onclick').includes(btId)) {
+                    el.click(); // Gọi trực tiếp hàm switchAssignment thông qua thuộc tính onclick đã cấu hình
+                }
+            });
+        }
+
+        // Logic điều hướng Menu Bài Tập Trái (Dashboard)
+        function switchAssignment(btId, btnElement) {
+            // Đổi active ở Menu Sidebar
+            document.querySelectorAll('.dash-menu-item').forEach(el => el.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Đổi Nội dung Panel Chính
+            document.querySelectorAll('.assignment-container').forEach(el => {
+                el.classList.remove('block');
+                el.classList.add('hidden');
+            });
+            const targetContainer = document.getElementById(btId);
+            if(targetContainer) {
+                targetContainer.classList.remove('hidden');
+                targetContainer.classList.add('block');
+                
+                // Mặc định bật lại tab "Mục tiêu" đầu tiên khi chuyển bài
+                const firstTabBtn = targetContainer.querySelector('.dash-tab-btn');
+                if(firstTabBtn) switchTab(btId, 'muctieu', firstTabBtn);
+            }
+        }
+
+        // Logic chuyển Tab (Mục tiêu, Quá trình, Sản phẩm) bên trong mỗi Bài tập
+        function switchTab(btId, tabId, btnElement) {
+            const container = document.getElementById(btId);
+            
+            // Xóa active toàn bộ nút Tab
+            container.querySelectorAll('.dash-tab-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+
+            // Ẩn tất cả Tab Content
+            container.querySelectorAll('.dash-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Hiện Tab Content mục tiêu
+            const targetContent = container.querySelector(`#${btId}-${tabId}`);
+            if(targetContent) targetContent.classList.add('active');
+        }
+    </script>
+</body>
+</html>
